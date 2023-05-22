@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Shoes = ({item, i}) => {
-  console.log(item);
   return (
     <>
       <div className="col-md-4">
