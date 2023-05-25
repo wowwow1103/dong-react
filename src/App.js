@@ -5,28 +5,46 @@ import {useEffect, useState} from 'react';
 import axios from 'axios';
 
 function App({children}) {
+  let [dataAll, setDataAll] = useState(itemList);
   let [apiData, setApiData] = useState();
-  let [dataAll, setDataAll] = useState();
-  useEffect(() => {
-    axios.get(`https://codingapple1.github.io/shop/data2.json`).then(response => {
-      setApiData(response.data);
-    });
-  }, []);
+  let [btnClick, setBtnClick] = useState(2);
+  let [imgIdx, setImgIdx] = useState(2);
 
   useEffect(() => {
-    setDataAll({...itemList, ...apiData});
-    console.log(dataAll);
-  }, [apiData]);
+    axios.get(`https://codingapple1.github.io/shop/data${imgIdx}.json`).then(response => {
+      setApiData(response.data);
+    });
+  }, [btnClick]);
+
   return (
     <>
       <div className="itme-list container">
         <div className="row">
-          {itemList.map((item, i) => {
-            return <Shoes item={item} i={i} />;
+          {dataAll.map((item, i) => {
+            return <Shoes item={item} i={i} key={item.id} />;
           })}
         </div>
       </div>
-      <button className="text-center">ss</button>
+      <div className="text-center mt-5">
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            if (btnClick == 2) {
+              setDataAll([...itemList, ...apiData]);
+              setBtnClick(3);
+              setImgIdx(3);
+            } else if (btnClick == 3) {
+              setDataAll([...dataAll, ...apiData]);
+              setBtnClick(4);
+            } else {
+              alert('더이상 없습니다.');
+            }
+          }}
+        >
+          더보기
+        </button>
+        <button className="btn btn-danger">닫기</button>
+      </div>
       {children}
     </>
   );
