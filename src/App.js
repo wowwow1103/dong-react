@@ -43,7 +43,16 @@ function App({children}) {
         >
           더보기
         </button>
-        <button className="btn btn-danger">닫기</button>
+        <button
+          className="btn btn-danger"
+          onClick={() => {
+            setDataAll(itemList);
+            setBtnClick(2);
+            setImgIdx(2);
+          }}
+        >
+          닫기
+        </button>
       </div>
       {children}
     </>
