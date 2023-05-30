@@ -15,7 +15,7 @@ const Header = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link onClick={() => navigate('/')}>Home</Nav.Link>
-              <Nav.Link onClick={() => navigate('/detail')}>Link</Nav.Link>
+              <Nav.Link onClick={() => navigate('/detail')}>Detail</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

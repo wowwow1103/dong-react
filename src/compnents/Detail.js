@@ -1,19 +1,26 @@
 import React, {useEffect, useState} from 'react';
 import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
 import itemList from '../data/itemList';
 import styled from 'styled-components';
+import DetailTab from './DetailTab';
 
 const Detail = () => {
+  let [none, setNone] = useState(true);
+  let [load, setLoad] = useState(true);
   useEffect(() => {
+    setTimeout(() => {
+      setLoad(false);
+    }, 50);
     setTimeout(() => {
       setNone(false);
     }, 2000);
   }, []);
 
-  let [none, setNone] = useState(true);
+  let [tab, setTab] = useState(0);
 
   return (
-    <>
+    <div className={`${load ? 'fadeOut' : 'fadeIn'}`}>
       {none === true ? (
         <div className="alert alert-warning text-center">
           2초 이내에 누르면 할인
@@ -50,8 +57,41 @@ const Detail = () => {
             <button className="btn btn-danger">주문하기</button>
           </div>
         </div>
+        <Nav variant="tabs" defaultActiveKey="link0">
+          <Nav.Item>
+            <Nav.Link
+              eventKey="link0"
+              onClick={() => {
+                setTab(0);
+              }}
+            >
+              버튼01
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link
+              eventKey="link1"
+              onClick={() => {
+                setTab(1);
+              }}
+            >
+              버튼02
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link
+              eventKey="link2"
+              onClick={() => {
+                setTab(2);
+              }}
+            >
+              버튼03
+            </Nav.Link>
+          </Nav.Item>
+        </Nav>
+        <DetailTab tab={tab}></DetailTab>
       </div>
-    </>
+    </div>
   );
 };
 
